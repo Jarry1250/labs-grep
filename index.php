@@ -38,11 +38,11 @@
 		die( 'An unexpected error occurred' );
 	}
 
-	echo get_html( 'header', 'Article title GREP (beta)' );
+	echo get_html( 'header', _html( 'title' ) );
 
 ?>
 	<h3><?php echo _html( 'enter-details' ); ?></h3>
-	<p><?php echo _( 'introduction', array( 'variables' => array( '<a href="http://' . $I18N->getLang() . '.wikipedia.org/wiki/' . str_replace( ' ', '_', _( 'regex' ) ) . '" target="_blank">' . _( 'explanation' ) . '</a>' ) ) ); ?></p>
+	<p><?php echo $I18N->msg( 'introduction', array( 'variables' => array( '<a href="http://' . $I18N->getLang() . '.wikipedia.org/wiki/' . str_replace( ' ', '_', $I18N->msg( 'regex' ) ) . '" target="_blank">' . $I18N->msg( 'explanation' ) . '</a>' ) ) ); ?></p>
 	<form action="index.php" method="GET">
 		<p><label for="lang"><?php echo _html( 'language-label' ) . _g( 'colon-separator' ); ?>&nbsp;</label><input
 				type="text" name="lang" id="lang" value="<?php echo $grepLang; ?>" style="width:80px;" maxlength="7"
@@ -57,15 +57,15 @@
 				required="required"/>/ <br/>
 			<input type="checkbox" value="on"
 				   name="redirects" id="redirects" <?php if( $grepRedirects ){
-				echo " checked=\"checked\"";
+				echo ' checked="checked"';
 			} ?>/>&nbsp;<label
 				for="limit"><?php echo _html( 'redirects-label' ); ?></label><br/>
 			<input type="checkbox" value="on" id="limit" name="limit"<?php if( $grepLimit ){
-				echo " checked=\"checked\"";
+				echo ' checked="checked"';
 			} ?>/>&nbsp;<label
 				for="redirects"><?php echo _html( 'limit-label' ); ?></label><br/>
-			<input type="submit" value="<?php echo _g( 'form-submit' ); ?>"/>&nbsp;<input type="reset"
-																						  value="<?php echo _g( 'form-reset' ); ?>"/>
+			<input type="submit" value="<?php echo _g( 'form-submit' ); ?>"/>&nbsp;
+			<input type="reset" value="<?php echo _g( 'form-reset' ); ?>"/>
 		</p>
 	</form>
 <?php
@@ -81,7 +81,7 @@
 		if( $res->num_rows === 0 ){
 			echo "<p>" . _html( 'error-zeroresults' ) . "</p>";
 		} else {
-			echo "<p>" . _html( 'match-count', array( 'variables' => array( $res->num_rows ) ) ) . "</p>";
+			echo "<p>" . $I18n->msg( 'match-count', array( 'variables' => array( $res->num_rows ), 'parsemag' => true ) ) . "</p>";
 			$limit = ( $grepLimit ) ? 100 : -1;
 			$i = 0;
 			echo "<ol>\n";
