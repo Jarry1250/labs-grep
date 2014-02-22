@@ -76,7 +76,8 @@
 
 		$mysqli = dbconnect( get_databasename( $grepLang, $grepProject ) );
 		$redir = ( $grepRedirects ) ? " AND page_is_redirect=0" : '';
-		$res = $mysqli->query( "SELECT page_title, page_is_redirect FROM page WHERE page_namespace=$grepNamespace $redir AND page_title REGEXP '" . mysql_real_escape_string( str_replace( " ", "_", $grepPattern ) ) . "';" );
+		$grepPattern = $mysqli->real_escape_string( str_replace( " ", "_", $grepPattern ) );
+		$res = $mysqli->query( "SELECT page_title, page_is_redirect FROM page WHERE page_namespace=$grepNamespace $redir AND page_title REGEXP '" . $grepPattern . "';" );
 		if( $res->num_rows === 0 ){
 			echo "<p>" . _html( 'error-zeroresults' ) . "</p>";
 		} else {
