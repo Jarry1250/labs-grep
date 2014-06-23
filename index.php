@@ -19,6 +19,7 @@
 	*/
 
 	require_once( '/data/project/jarry-common/public_html/global.php' );
+	require_once( '/data/project/jarry-common/public_html/libs/i18n.php' );
 
 	$I18N->setDomain( 'grep' );
 
