@@ -19,7 +19,6 @@
 	*/
 
 	require_once( '/data/project/jarry-common/public_html/global.php' );
-	require_once( '/data/project/jarry-common/public_html/libs/i18n.php' );
 
 	$I18N->setDomain( 'grep' );
 
@@ -81,7 +80,7 @@
 		if( $res->num_rows === 0 ){
 			echo "<p>" . _html( 'error-zeroresults' ) . "</p>";
 		} else {
-			echo "<p>" . $I18n->msg( 'match-count', array( 'variables' => array( $res->num_rows ), 'parsemag' => true ) ) . "</p>";
+			echo "<p>" . $I18N->msg( 'match-count', array( 'variables' => array( $res->num_rows ), 'parsemag' => true ) ) . "</p>";
 			$limit = ( $grepLimit ) ? 100 : -1;
 			$i = 0;
 			echo "<ol>\n";
