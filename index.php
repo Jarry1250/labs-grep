@@ -74,9 +74,10 @@
 		echo "<h3>" . _html( 'results' ) . "</h3>";
 
 		$mysqli = dbconnect( get_databasename( $grepLang, $grepProject ) );
-		$redir = ( $grepRedirects ) ? " AND page_is_redirect=0" : '';
+		$redir = ( $grepRedirects ) ? '' : ' AND page_is_redirect=0';
 		$grepPattern = $mysqli->real_escape_string( str_replace( " ", "_", $grepPattern ) );
-		$res = $mysqli->query( "SELECT page_title, page_is_redirect FROM page WHERE page_namespace=$grepNamespace $redir AND page_title REGEXP '" . $grepPattern . "';" );
+		$sql = "SELECT page_title, page_is_redirect FROM page WHERE page_namespace=$grepNamespace $redir AND page_title REGEXP '" . $grepPattern . "';";
+		$res = $mysqli->query( $sql );
 		if( $res->num_rows === 0 ){
 			echo "<p>" . _html( 'error-zeroresults' ) . "</p>";
 		} else {
@@ -85,7 +86,13 @@
 			$i = 0;
 			echo "<ol>\n";
 			while( $row = $res->fetch_assoc() ){
-				echo "<li><a href=\"http://$grepLang.$grepProject.org/wiki/$namespaceName:" . $row['page_title'] . ( $row['page_is_redirect'] ? "?redirect=no" : "" ) . "\">" . str_replace( "_", " ", $row['page_title'] ) . "</a></li>\n";
+				$url = "http://$grepLang.$grepProject.org/wiki/$namespaceName";
+				$url .= ( ( $namespaceName  == '' ) ? '' : ':' ) . $row['page_title'];
+				$url .= $row['page_is_redirect'] ? "?redirect=no" : "" ;
+
+				echo "<li" . ( $row['page_is_redirect'] ? ' style="font-style: italic;"': "" ) . '>';
+				echo "<a href=\"$url\">" . str_replace( "_", " ", $row['page_title'] ) . '</a>';
+				echo "</li>\n";
 				if( ++$i == $limit ){
 					break;
 				}
