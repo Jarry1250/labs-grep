@@ -58,11 +58,11 @@
 				   name="redirects" id="redirects" <?php if( $grepRedirects ){
 				echo ' checked="checked"';
 			} ?>/>&nbsp;<label
-				for="limit"><?php echo _html( 'redirects-label' ); ?></label><br/>
+				for="redirects"><?php echo _html( 'redirects-label' ); ?></label><br/>
 			<input type="checkbox" value="on" id="limit" name="limit"<?php if( $grepLimit ){
 				echo ' checked="checked"';
 			} ?>/>&nbsp;<label
-				for="redirects"><?php echo _html( 'limit-label' ); ?></label><br/>
+				for="limit"><?php echo _html( 'limit-label' ); ?></label><br/>
 			<input type="submit" value="<?php echo _g( 'form-submit' ); ?>"/>&nbsp;
 			<input type="reset" value="<?php echo _g( 'form-reset' ); ?>"/>
 		</p>
