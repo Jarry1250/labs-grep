@@ -29,6 +29,7 @@
 	$grepRedirects = ( isset( $_GET['redirects'] ) && $_GET['redirects'] == 'on' );
 	$grepLimit = ( isset( $_GET['limit'] ) && $_GET['limit'] == 'on' );
 
+	list( $grepLang, ) = explode( '-', $grepLang );
 	$namespaceNames = getNamespaces( $grepLang, $grepProject );
 	$namespaceName = $namespaceNames[$grepNamespace];
 	$namespaceSelect = getNamespaceSelect( $grepLang, $grepNamespace );
