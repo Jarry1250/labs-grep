@@ -79,7 +79,9 @@
 		$grepPattern = $mysqli->real_escape_string( str_replace( " ", "_", $grepPattern ) );
 		$sql = "SELECT page_title, page_is_redirect FROM page WHERE page_namespace=$grepNamespace $redir AND page_title REGEXP '" . $grepPattern . "';";
 		$res = $mysqli->query( $sql );
-		if( $res->num_rows === 0 ){
+		if( $res === false ){
+			echo "<p>" . $mysqli->error . "</p>";
+		} elseif( $res->num_rows === 0 ){
 			echo "<p>" . _html( 'error-zeroresults' ) . "</p>";
 		} else {
 			echo "<p>" . $I18N->msg( 'match-count', array( 'variables' => array( $res->num_rows ), 'parsemag' => true ) ) . "</p>";
