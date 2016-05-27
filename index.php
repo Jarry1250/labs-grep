@@ -42,7 +42,7 @@
 
 ?>
 	<h3><?php echo _html( 'enter-details' ); ?></h3>
-	<p><?php echo $I18N->msg( 'introduction', array( 'variables' => array( '<a href="http://' . $I18N->getLang() . '.wikipedia.org/wiki/' . str_replace( ' ', '_', $I18N->msg( 'regex' ) ) . '" target="_blank">' . $I18N->msg( 'explanation' ) . '</a>' ) ) ); ?></p>
+	<p><?php echo $I18N->msg( 'introduction', array( 'variables' => array( '<a href="https://' . $I18N->getLang() . '.wikipedia.org/wiki/' . str_replace( ' ', '_', $I18N->msg( 'regex' ) ) . '" target="_blank">' . $I18N->msg( 'explanation' ) . '</a>' ) ) ); ?></p>
 	<form action="index.php" method="GET">
 		<p><label for="lang"><?php echo _html( 'language-label' ) . _g( 'colon-separator' ); ?>&nbsp;</label><input
 				type="text" name="lang" id="lang" value="<?php echo $grepLang; ?>" style="width:80px;" maxlength="7"
@@ -89,7 +89,7 @@
 			$i = 0;
 			echo "<ol>\n";
 			while( $row = $res->fetch_assoc() ){
-				$url = "http://$grepLang.$grepProject.org/wiki/$namespaceName";
+				$url = "https://$grepLang.$grepProject.org/wiki/$namespaceName";
 				$url .= ( ( $namespaceName  == '' ) ? '' : ':' ) . $row['page_title'];
 				$url .= $row['page_is_redirect'] ? "?redirect=no" : "" ;
 
